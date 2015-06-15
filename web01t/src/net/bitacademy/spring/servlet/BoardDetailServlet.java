@@ -90,7 +90,7 @@ public class BoardDetailServlet extends HttpServlet {
       out.println("<button type='button' "
           + " onclick='location.href=\"remove.do?no=" + rs.getInt("bno")
           + "\";'>삭제</button>");
-      
+       
       out.println("</form>");
       
     } catch (Exception e) {
