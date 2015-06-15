@@ -52,22 +52,23 @@ public class BoardDetailServlet extends HttpServlet {
       }
       
       out.println("<h1>게시물 상세정보</h1>");
+      out.println("<form action='change.do' method='post'>");
       out.println("<table border='1'>");
       out.println("<tr>");
       out.println("  <th>번호</th>"
-          + "<td><input type='text' readonly value='" + rs.getInt("bno")
+          + "<td><input name='no' type='text' readonly value='" + rs.getInt("bno")
           + "'></td>");
       out.println("</tr>");
       
       out.println("<tr>");
       out.println("  <th>제목</th>"
-          + "<td><input type='text' value='" + rs.getString("title")
+          + "<td><input name='title' type='text' value='" + rs.getString("title")
           + "'></td>");
       out.println("</tr>");
       
       out.println("<tr>");
       out.println("  <th>내용</th><td>"
-          + "<textarea rows='5' cols='50'>" + rs.getString("content")
+          + "<textarea name='content' rows='5' cols='50'>" + rs.getString("content")
           + "</textarea></td>");
       out.println("</tr>");
       
@@ -84,6 +85,13 @@ public class BoardDetailServlet extends HttpServlet {
       out.println("</tr>");
       
       out.println("</table>");
+      
+      out.println("<button type='submit'>변경</button>");
+      out.println("<button type='button' "
+          + " onclick='location.href=\"remove.do?no=" + rs.getInt("bno")
+          + "\";'>삭제</button>");
+      
+      out.println("</form>");
       
     } catch (Exception e) {
       out.println("예외 발생!");
