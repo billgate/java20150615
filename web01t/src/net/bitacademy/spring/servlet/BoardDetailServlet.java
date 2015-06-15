@@ -47,6 +47,10 @@ public class BoardDetailServlet extends HttpServlet {
           + " from board"
           + " where bno=" + req.getParameter("no"));
       
+      if (!rs.next()) {
+        throw new Exception("해당 번호의 게시물을 찾을 수 없습니다.");
+      }
+      
       out.println("<h1>게시물 상세정보</h1>");
       out.println("<table border='1'>");
       out.println("<tr>");
@@ -56,15 +60,27 @@ public class BoardDetailServlet extends HttpServlet {
       out.println("</tr>");
       
       out.println("<tr>");
-      out.println("  <th>제목</th><td><input type='text' value=''></td>");
+      out.println("  <th>제목</th>"
+          + "<td><input type='text' value='" + rs.getString("title")
+          + "'></td>");
       out.println("</tr>");
       
       out.println("<tr>");
-      out.println("  <th>등록일</th><td></td>");
+      out.println("  <th>내용</th><td>"
+          + "<textarea rows='5' cols='50'>" + rs.getString("content")
+          + "</textarea></td>");
       out.println("</tr>");
       
       out.println("<tr>");
-      out.println("  <th>조회수</th><td></td>");
+      out.println("  <th>등록일</th>"
+          + "<td><input type='text' readonly value='" + rs.getDate("cre_dt")
+          + "'></td>");
+      out.println("</tr>");
+      
+      out.println("<tr>");
+      out.println("  <th>조회수</th>"
+          + "<td><input type='text' readonly value='" + rs.getInt("views")
+          + "'></td>");
       out.println("</tr>");
       
       out.println("</table>");
