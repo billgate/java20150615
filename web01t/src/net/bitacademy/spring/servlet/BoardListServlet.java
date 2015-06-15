@@ -8,10 +8,12 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebServlet("/board/list.do")
 public class BoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
@@ -35,6 +37,7 @@ public class BoardListServlet extends HttpServlet {
     ResultSet rs = null;
     
     try {
+      Class.forName("com.mysql.jdbc.Driver");
       con = DriverManager.getConnection(
         "jdbc:mysql://localhost:3306/studydb", "study", "study");
     
@@ -42,7 +45,7 @@ public class BoardListServlet extends HttpServlet {
       rs = stmt.executeQuery("select bno, title, cre_dt, views from board");
       
       out.println("<h1>게시물 목록</h1>");
-      out.println("<table>");
+      out.println("<table border='1'>");
       out.println("<tr>");
       out.println("  <th>번호</th>");
       out.println("  <th>제목</th>");
