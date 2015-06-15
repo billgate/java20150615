@@ -56,7 +56,8 @@ public class BoardListServlet extends HttpServlet {
       while (rs.next()) {
         out.println("<tr>");
         out.println("  <td>" + rs.getInt("bno") + "</td>");
-        out.println("  <td>" + rs.getString("title") + "</td>");
+        out.println("  <td><a href='detail.do?no=" + rs.getInt("bno")
+            + "'>" + rs.getString("title") + "</a></td>");
         out.println("  <td>" + rs.getString("cre_dt") + "</td>");
         out.println("  <td>" + rs.getInt("views") + "</td>");
         out.println("</tr>");
