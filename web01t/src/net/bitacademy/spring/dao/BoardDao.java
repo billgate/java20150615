@@ -2,6 +2,7 @@ package net.bitacademy.spring.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -81,6 +82,28 @@ public class BoardDao {
       try { con.close(); } catch (Exception ex) {}
     }
   }
+  
+  public int insert(Board board) throws Exception {
+    Connection con = null;
+    PreparedStatement stmt = null;
+    
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/studydb", "study", "study");
+    
+      stmt = con.prepareStatement(
+          "insert into board(title,content,cre_dt) values(?,?,now())");
+      stmt.setString(1, board.getTitle());
+      stmt.setString(2, board.getContent());
+      return stmt.executeUpdate();
+
+    } finally {
+      try { stmt.close(); } catch (Exception ex) {}
+      try { con.close(); } catch (Exception ex) {}
+    }
+  }
+  
 }
 
 
