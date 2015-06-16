@@ -42,7 +42,7 @@ public class BoardListServlet extends HttpServlet {
           + " order by bno desc");
       
       ArrayList<Board> boards = new ArrayList<Board>();
-      Board board = null;
+      Board board = null; 
       while (rs.next()) {
         board = new Board();
         board.setNo(rs.getInt("bno"));
