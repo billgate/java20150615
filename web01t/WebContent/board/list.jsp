@@ -3,9 +3,7 @@
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-ArrayList<Board> boards = (ArrayList<Board>) request.getAttribute("list");
-%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,14 +21,14 @@ ArrayList<Board> boards = (ArrayList<Board>) request.getAttribute("list");
   <th>조회수</th>
 </tr>
 
-<%for (Board board : boards) {%>
+<c:forEach items="${list}" var="board">
 <tr>
-  <td><%=board.getNo()%></td>
-  <td><a href='detail.do?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
-  <td><%=board.getCreateDate()%></td>
-  <td><%=board.getViews()%></td>
+  <td>${board.no}</td>
+  <td><a href='detail.do?no=${board.no}'>${board.title}</a></td>
+  <td>${board.createDate}</td>
+  <td>${board.views}</td>
 </tr>
-<%}%>
+</c:forEach>
 
 </table>
 </body>
