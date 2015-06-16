@@ -104,6 +104,50 @@ public class BoardDao {
     }
   }
   
+  public int update(Board board) throws Exception {
+    Connection con = null;
+    PreparedStatement stmt = null;
+    
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/studydb", "study", "study");
+    
+      stmt = con.prepareStatement(
+          "update board set title=?, content=? where bno=?");
+      stmt.setString(1, board.getTitle());
+      stmt.setString(2, board.getContent());
+      stmt.setInt(3, board.getNo());
+      
+      return stmt.executeUpdate();
+      
+    } finally {
+      try { stmt.close(); } catch (Exception ex) {}
+      try { con.close(); } catch (Exception ex) {}
+    }
+  }
+  
+  public int delete(int no) throws Exception {
+    Connection con = null;
+    PreparedStatement stmt = null;
+    
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+      con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/studydb", "study", "study");
+    
+      stmt = con.prepareStatement(
+          "delete from board where bno=?");
+      stmt.setInt(1, no);
+      
+      return stmt.executeUpdate();
+      
+    } finally {
+      try { stmt.close(); } catch (Exception ex) {}
+      try { con.close(); } catch (Exception ex) {}
+    }
+  }
+  
 }
 
 
