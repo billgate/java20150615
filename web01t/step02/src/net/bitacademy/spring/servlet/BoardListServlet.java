@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.bitacademy.spring.vo.Board;
 
-@WebServlet("/board/detail.do")
-public class BoardDetailServlet extends HttpServlet {
+@WebServlet("/board/list.do")
+public class BoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   @Override
@@ -36,30 +37,31 @@ public class BoardDetailServlet extends HttpServlet {
     
       stmt = con.createStatement();
       rs = stmt.executeQuery(
-          "select bno, title, content, cre_dt, views"
+          "select bno, title, cre_dt, views"
           + " from board"
-          + " where bno=" + req.getParameter("no"));
+          + " order by bno desc");
       
-      if (!rs.next()) {
-        throw new Exception("해당 번호의 게시물을 찾을 수 없습니다.");
+      ArrayList<Board> boards = new ArrayList<Board>();
+      Board board = null; 
+      while (rs.next()) {
+        board = new Board();
+        board.setNo(rs.getInt("bno"));
+        board.setTitle(rs.getString("title"));
+        board.setCreateDate(rs.getDate("cre_dt"));
+        board.setViews(rs.getInt("views"));
+        boards.add(board);
       }
       
-      Board board = new Board();
-      board.setNo(rs.getInt("bno"));
-      board.setTitle(rs.getString("title"));
-      board.setContent(rs.getString("content"));
-      board.setCreateDate(rs.getDate("cre_dt"));
-      board.setViews(rs.getInt("views"));
+      req.setAttribute("list", boards);
       
-      req.setAttribute("board", board);
-      RequestDispatcher rd = req.getRequestDispatcher("/board/detail.jsp");
+      RequestDispatcher rd = req.getRequestDispatcher("/board/list.jsp");
       rd.include(req, resp);
       
     } catch (Exception e) {
       req.setAttribute("error", e);
       RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
       rd.include(req, resp);
-
+      
     } finally {
       try { rs.close(); } catch (Exception ex) {}
       try { stmt.close(); } catch (Exception ex) {}
