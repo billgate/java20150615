@@ -1,6 +1,11 @@
+<%@page import="net.bitacademy.spring.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+ArrayList<Board> boards = (ArrayList<Board>) request.getAttribute("list");
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,31 +22,20 @@
   <th>등록일</th>
   <th>조회수</th>
 </tr>
+
+<%for (Board board : boards) {%>
 <tr>
-  <td>8</td>
-  <td><a href='detail.do?no=8'>변경하고싶어...</a></td>
-  <td>2015-06-15 16:57:12.0</td>
-  <td>0</td>
+  <td><%=board.getNo()%></td>
+  <td><a href='detail.do?no=<%=board.getNo()%>'><%=board.getTitle()%></a></td>
+  <td><%=board.getCreateDate()%></td>
+  <td><%=board.getViews()%></td>
 </tr>
-<tr>
-  <td>7</td>
-  <td><a href='detail.do?no=7'>ㄴㅇㄹㅇㄴ</a></td>
-  <td>2015-06-15 16:57:08.0</td>
-  <td>0</td>
-</tr>
-<tr>
-  <td>3</td>
-  <td><a href='detail.do?no=3'>cccccㄴㅇㄹㅇㄴㄹㅇㄴ</a></td>
-  <td>2015-06-15 11:44:38.0</td>
-  <td>0</td>
-</tr>
-<tr>
-  <td>1</td>
-  <td><a href='detail.do?no=1'>aaaa</a></td>
-  <td>2015-06-15 11:44:38.0</td>
-  <td>0</td>
-</tr>
+<%}%>
+
 </table>
 </body>
 </html>
+    
+    
+    
     
