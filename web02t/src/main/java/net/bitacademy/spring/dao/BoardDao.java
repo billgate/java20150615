@@ -30,7 +30,7 @@ public class BoardDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       return sqlSession.selectList(
-          "net.bitacaemy.spring.dao.BoardDao.selectList");
+          "net.bitacademy.spring.dao.BoardDao.selectList");
     } finally {
       sqlSession.close();
     }
@@ -40,7 +40,7 @@ public class BoardDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       return sqlSession.selectOne(
-          "net.bitacaemy.spring.dao.BoardDao.selectOne", no);
+          "net.bitacademy.spring.dao.BoardDao.selectOne", no);
     } finally {
       sqlSession.close();
     }
@@ -50,7 +50,7 @@ public class BoardDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       int count = sqlSession.insert(
-          "net.bitacaemy.spring.dao.BoardDao.insert", board);
+          "net.bitacademy.spring.dao.BoardDao.insert", board);
       sqlSession.commit(); // temp 데이터베이스 ---> 실제 데이터베이스에 적용
       return count;
     } finally {
@@ -62,7 +62,7 @@ public class BoardDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       int count = sqlSession.update(
-          "net.bitacaemy.spring.dao.BoardDao.update", board);
+          "net.bitacademy.spring.dao.BoardDao.update", board);
       sqlSession.commit(); // temp 데이터베이스 ---> 실제 데이터베이스에 적용
       return count;
     } finally {
@@ -74,7 +74,7 @@ public class BoardDao {
     SqlSession sqlSession = sqlSessionFactory.openSession();
     try {
       int count = sqlSession.delete(
-          "net.bitacaemy.spring.dao.BoardDao.delete", no);
+          "net.bitacademy.spring.dao.BoardDao.delete", no);
       sqlSession.commit(); // temp 데이터베이스 ---> 실제 데이터베이스에 적용
       return count;
     } finally {
