@@ -14,7 +14,7 @@ import net.bitacademy.spring.controller.PageController;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-@WebServlet("*.do")
+@WebServlet(urlPatterns="*.do",loadOnStartup=1)
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
