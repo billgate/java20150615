@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.bitacademy.spring.controller.BoardAddController;
+import net.bitacademy.spring.controller.BoardChangeController;
+import net.bitacademy.spring.controller.BoardDetailController;
 import net.bitacademy.spring.controller.BoardListController;
+import net.bitacademy.spring.controller.BoardRemoveController;
 
 @WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
@@ -19,16 +23,32 @@ public class DispatcherServlet extends HttpServlet {
   protected void service(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     
+    req.setCharacterEncoding("UTF-8"); 
     resp.setContentType("text/html;charset=UTF-8");
     
     try {
       //http://localhost:9999/web02t/board/list.do?pageNo=2&size=5
       //-getServletPath() ==> /board/list.do
       
+      String servletPath = req.getServletPath(); 
       String viewUrl = null;
-      if (req.getServletPath().equals("/board/list.do")) {
+      if (servletPath.equals("/board/list.do")) {
         BoardListController controller = new BoardListController();
         viewUrl = controller.execute(req, resp);
+      } else if (servletPath.equals("/board/detail.do")) {
+        BoardDetailController controller = new BoardDetailController();
+        viewUrl = controller.execute(req, resp);
+      } else if (servletPath.equals("/board/add.do")) {
+        BoardAddController controller = new BoardAddController();
+        viewUrl = controller.execute(req, resp);
+      } else if (servletPath.equals("/board/change.do")) {
+        BoardChangeController controller = new BoardChangeController();
+        viewUrl = controller.execute(req, resp);
+      } else if (servletPath.equals("/board/remove.do")) {
+        BoardRemoveController controller = new BoardRemoveController();
+        viewUrl = controller.execute(req, resp);
+      } else {
+        throw new Exception("해당 URL을 처리할 수 없습니다.");
       }
       
       RequestDispatcher rd = req.getRequestDispatcher(viewUrl);
