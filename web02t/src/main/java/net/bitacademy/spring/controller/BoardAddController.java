@@ -1,8 +1,5 @@
 package net.bitacademy.spring.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import net.bitacademy.spring.dao.BoardDao;
 import net.bitacademy.spring.vo.Board;
 
@@ -17,6 +14,7 @@ public class BoardAddController  {
   @Autowired
   BoardDao boardDao;
   
+  /* 
   @RequestMapping(method=RequestMethod.POST)
   public String add(HttpServletRequest req, HttpServletResponse resp)
       throws Exception {
@@ -27,6 +25,35 @@ public class BoardAddController  {
     
     boardDao.insert(board);
     
+    return "redirect:list.do";
+  }
+  */
+  
+  /* 원하는 요청 파라미터 값이 있으면, 메서드의 파라미터로 선언하라!
+   * 단, 파라미터 이름과 같은 이름으로 변수를 선언해야 한다. 
+   * 
+   */
+  /*
+  @RequestMapping(method=RequestMethod.POST)
+  public String add(String title, String content, HttpServletResponse resp)
+      throws Exception {
+    
+    Board board = new Board();
+    board.setTitle(title);
+    board.setContent(content);
+    
+    boardDao.insert(board);
+    
+    return "redirect:list.do";
+  }*/
+  
+  /* 요청 파라미터를 VO 객체에 담아 달라고 요청할 수 있다.
+   * 
+   */
+  @RequestMapping(method=RequestMethod.POST)
+  public String add(Board board)
+      throws Exception {
+    boardDao.insert(board);
     return "redirect:list.do";
   }
 
