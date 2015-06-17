@@ -51,8 +51,12 @@ public class DispatcherServlet extends HttpServlet {
         throw new Exception("해당 URL을 처리할 수 없습니다.");
       }
       
-      RequestDispatcher rd = req.getRequestDispatcher(viewUrl);
-      rd.include(req, resp);
+      if (viewUrl.startsWith("redirect:")) {
+        resp.sendRedirect(viewUrl.substring(9));
+      } else {
+        RequestDispatcher rd = req.getRequestDispatcher(viewUrl);
+        rd.include(req, resp);
+      }
       
     } catch (Exception e) {
       req.setAttribute("error", e);
