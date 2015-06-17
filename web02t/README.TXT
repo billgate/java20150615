@@ -6,7 +6,7 @@
 - JDBC 기능을 대행한다. 
 
 [step03] - Servlet(x) Page Controller(Plain Old Java Object) 
-           + JSP + DAO + Front Controller(서블릿)
+           + JSP + DAO + mybatis + Front Controller(서블릿)
 * Front Controller
 - 클라이언트의 모든 요청을 받아서 적절한 컨트롤러에게 위임한다.
 - 페이지 컨트롤러의 공통 기능을 수행
@@ -21,12 +21,18 @@
 [step04] - Page Controller(POJO; controller 컴포넌트) 
            + JSP(view 컴포넌트)
            + DAO(model 컴포넌트) 
+           + mybatis
            + Front Controller(서블릿)
            + Bean Container(= Object Manager) => Spring Bean Container
+
+[step05] - Page Controller(POJO; controller 컴포넌트) 
+           + JSP(view 컴포넌트)
+           + DAO(model 컴포넌트) 
+           + mybatis
+           + Front Controller(서블릿)
+           + Bean Container(= Object Manager) => Spring Bean Container 
+           + Spring MVC 
            
-
-
-
 
 
 

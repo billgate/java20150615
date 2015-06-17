@@ -7,9 +7,9 @@ import net.bitacademy.spring.vo.Board;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component // 빈의 이름을 지정하지 않으면, 클래스 이름에서 첫 알파벳을 소문자로 만든 이름을 사용한다.
+@Repository // 빈의 이름을 지정하지 않으면, 클래스 이름에서 첫 알파벳을 소문자로 만든 이름을 사용한다.
 public class BoardDao {  // ==> boardDao
   @Autowired
   SqlSessionFactory sqlSessionFactory;

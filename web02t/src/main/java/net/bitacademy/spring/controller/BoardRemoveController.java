@@ -3,17 +3,20 @@ package net.bitacademy.spring.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import net.bitacademy.spring.dao.BoardDao;
 
-@Component("/board/remove.do")
-public class BoardRemoveController implements PageController  {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/board/remove.do")
+public class BoardRemoveController {
   @Autowired
   BoardDao boardDao;
   
-  public String execute(HttpServletRequest req, HttpServletResponse resp)
+  @RequestMapping
+  public String remove(HttpServletRequest req, HttpServletResponse resp)
       throws Exception {
     
     int no = Integer.parseInt(req.getParameter("no"));
