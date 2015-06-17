@@ -34,6 +34,10 @@
            + Spring MVC 
            
 [step06] - 페이지 컨트롤러
+- 리턴 가능한 타입
+- 파라미터 타입
+
+[step07] - CRUD(Create, Read, Update, Delete)을 한 클래스로 묶는다. 
 
 
 
