@@ -1,4 +1,4 @@
-package net.bitacademy.spring.servlet;
+package net.bitacademy.spring.controller;
 
 import java.io.IOException;
 
@@ -10,27 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.bitacademy.spring.dao.BoardDao;
-import net.bitacademy.spring.vo.Board;
 
-@WebServlet("/board/change.do")
-public class BoardChangeServlet extends HttpServlet {
+public class BoardRemoveController extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
     
-    req.setCharacterEncoding("UTF-8"); 
-    Board board = new Board();
-    board.setNo(Integer.parseInt(req.getParameter("no")));
-    board.setTitle(req.getParameter("title"));
-    board.setContent(req.getParameter("content"));
+    int no = Integer.parseInt(req.getParameter("no"));
     
     resp.setContentType("text/html;charset=UTF-8");
     try {
       BoardDao boardDao = new BoardDao();
-      boardDao.update(board);
-
+      boardDao.delete(no);
+      
       resp.sendRedirect("list.do");
       return;
       
@@ -38,7 +32,6 @@ public class BoardChangeServlet extends HttpServlet {
       req.setAttribute("error", e);
       RequestDispatcher rd = req.getRequestDispatcher("/error.jsp");
       rd.include(req, resp);
-
     } 
   }
 
