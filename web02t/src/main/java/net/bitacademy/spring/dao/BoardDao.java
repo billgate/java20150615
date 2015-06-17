@@ -1,30 +1,18 @@
 package net.bitacademy.spring.dao;
 
-import java.io.InputStream;
 import java.util.List;
 
 import net.bitacademy.spring.vo.Board;
 
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class BoardDao {
-  static SqlSessionFactory sqlSessionFactory;
-  
-  static {
-    try {
-      // Resources는 클래스 경로에서 주어진 파일을 찾는다.
-      InputStream inputStream = Resources.getResourceAsStream(
-          "net/bitacademy/spring/dao/mybatis-config.xml");
-      sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-      
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-  
+@Component // 빈의 이름을 지정하지 않으면, 클래스 이름에서 첫 알파벳을 소문자로 만든 이름을 사용한다.
+public class BoardDao {  // ==> boardDao
+  @Autowired
+  SqlSessionFactory sqlSessionFactory;
   
   public List<Board> selectList() throws Exception {
     SqlSession sqlSession = sqlSessionFactory.openSession();
