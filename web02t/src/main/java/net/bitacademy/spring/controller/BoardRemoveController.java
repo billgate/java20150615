@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.bitacademy.spring.dao.BoardDao;
 
-public class BoardRemoveController {
+public class BoardRemoveController implements PageController  {
   
   public String execute(HttpServletRequest req, HttpServletResponse resp)
       throws Exception {

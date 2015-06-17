@@ -9,16 +9,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.bitacademy.spring.controller.BoardAddController;
-import net.bitacademy.spring.controller.BoardChangeController;
-import net.bitacademy.spring.controller.BoardDetailController;
-import net.bitacademy.spring.controller.BoardListController;
-import net.bitacademy.spring.controller.BoardRemoveController;
+import net.bitacademy.spring.controller.PageController;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 @WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
 
+  ApplicationContext beanContainer;
+  
+  @Override
+  public void init() throws ServletException {
+    // Servlet.init(ServletConfig)에 의해 호출된다.
+    // => 서블릿 컨테이너는 서블릿 객체를 생성한 후 init() 메서드를 호출한다.
+    // => 그래서 init()는 서블릿이 작업하는데 필요한 객체를 준비하는 일을 한다.
+    beanContainer = new FileSystemXmlApplicationContext(
+            this.getServletContext().getRealPath("/")
+            + "/WEB-INF/config/application-context.xml");
+  }
+  
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
@@ -32,20 +43,11 @@ public class DispatcherServlet extends HttpServlet {
       
       String servletPath = req.getServletPath(); 
       String viewUrl = null;
-      if (servletPath.equals("/board/list.do")) {
-        BoardListController controller = new BoardListController();
-        viewUrl = controller.execute(req, resp);
-      } else if (servletPath.equals("/board/detail.do")) {
-        BoardDetailController controller = new BoardDetailController();
-        viewUrl = controller.execute(req, resp);
-      } else if (servletPath.equals("/board/add.do")) {
-        BoardAddController controller = new BoardAddController();
-        viewUrl = controller.execute(req, resp);
-      } else if (servletPath.equals("/board/change.do")) {
-        BoardChangeController controller = new BoardChangeController();
-        viewUrl = controller.execute(req, resp);
-      } else if (servletPath.equals("/board/remove.do")) {
-        BoardRemoveController controller = new BoardRemoveController();
+      
+      PageController controller = 
+          (PageController)beanContainer.getBean(servletPath);
+      
+      if (controller != null) {
         viewUrl = controller.execute(req, resp);
       } else {
         throw new Exception("해당 URL을 처리할 수 없습니다.");

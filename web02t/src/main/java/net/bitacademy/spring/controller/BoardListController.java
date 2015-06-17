@@ -9,7 +9,7 @@ import net.bitacademy.spring.dao.BoardDao;
 import net.bitacademy.spring.vo.Board;
 
 
-public class BoardListController {
+public class BoardListController implements PageController  {
   
   public String execute(HttpServletRequest req, HttpServletResponse resp)
       throws Exception {
