@@ -18,6 +18,26 @@
 - 해당 페이지에서 출력할 데이터를 준비.
 - 해당 페이지를 위한 요청 데이터를 처리.
 
+[step04] - Page Controller(POJO; controller 컴포넌트) 
+           + JSP(view 컴포넌트)
+           + DAO(model 컴포넌트) 
+           + Front Controller(서블릿)
+           + Bean Container(= Object Manager) => Spring Bean Container
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
