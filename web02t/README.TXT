@@ -47,6 +47,14 @@
 
 * 기존의 JSP를 WEB-INF/views/ 폴더로 옮긴다.
 
+[step10] - Service 객체 도입
+* Service 객체
+- 업무 관련 로직을 실행
+- 트랜잭션 처리
+1) BOARD_LOG 테이블 생성한다.
+2) BoardLog VO 클래스 만든다.
+
+
 
 
 
