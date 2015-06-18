@@ -22,7 +22,7 @@ public class BoardService {
   @Transactional(propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
   public int add(Board board, String ip) throws Exception {
     int count = boardDao.insert(board);
-    logAction(board.getNo(), ip, BoardLog.CMD_INSERT);
+    logAction(board.getNo(), ip, BoardLog.CMD_INSERT + "OK");
     return count;
   }
   

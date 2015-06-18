@@ -17,7 +17,7 @@
 
   <!-- @Transactional 애노테이션을 처리할 객체 투입! -->
   <tx:annotation-driven transaction-manager="txManager"/>
-
+    
   <!-- mybatis 관련 객체 준비 -->
   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
