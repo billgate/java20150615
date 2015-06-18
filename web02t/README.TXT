@@ -56,6 +56,13 @@
 
 [step11] - Transaction 처리하는 방법
 1) 코드에서 트랜잭션을 직접 관리하기
+=> BoardService 클래스에 코드 추가
+
+[step12] - Transaction 처리하는 방법
+2) 애노테이션을 이용하여 트랜잭션 선언하기
+=> BoardService 클래스에 @Transactional 애노테이션 추가
+=> /WEB-INF/config/application-context.xml 에 <tx:annotation-driven> 태그 추가
+
 
 
 
