@@ -13,7 +13,7 @@
 
 	<insert id="insert" parameterType="BoardLog">
 	   insert into board_log(bno,ipaddr,command,cre_dt) 
-	   values(#{boardNo},#{ipAddress},#{command],now())
+	   values(#{boardNo},#{ipAddress},#{command},now())
 	</insert>
 	
 </mapper>
