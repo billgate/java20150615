@@ -29,17 +29,21 @@
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	    <property name="dataSource" ref="dataSource"/>
 	</bean>
-   <!--  
-   <bean id="/board/list.do" 
-         class="net.bitacademy.spring.controller.BoardListController"/>
-   <bean id="/board/detail.do" 
-         class="net.bitacademy.spring.controller.BoardDetailController"/>
-   <bean id="/board/add.do" 
-         class="net.bitacademy.spring.controller.BoardAddController"/>
-   <bean id="/board/change.do" 
-         class="net.bitacademy.spring.controller.BoardChangeController"/>
-   <bean id="/board/remove.do" 
-         class="net.bitacademy.spring.controller.BoardRemoveController"/>
-   -->
+	
+	<!-- DAO 자동 생성기 
+	   => DAO 인터페이스를 찾아서 그 일을 할 객체를 준비한다.
+	-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+	  <property name="basePackage" value="net.bitacademy.spring.dao" />
+	</bean>
+  
 </beans>
+
+
+
+
+
+
+
+
 

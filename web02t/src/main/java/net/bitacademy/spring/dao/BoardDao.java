@@ -4,72 +4,17 @@ import java.util.List;
 
 import net.bitacademy.spring.vo.Board;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-@Repository // 빈의 이름을 지정하지 않으면, 클래스 이름에서 첫 알파벳을 소문자로 만든 이름을 사용한다.
-public class BoardDao {  // ==> boardDao
-  @Autowired
-  SqlSessionFactory sqlSessionFactory;
-  
-  public List<Board> selectList() throws Exception {
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    try {
-      return sqlSession.selectList(
-          "net.bitacademy.spring.dao.BoardDao.selectList");
-    } finally {
-      sqlSession.close();
-    }
-  }
-  
-  public Board selectOne(int no) throws Exception {
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    try {
-      return sqlSession.selectOne(
-          "net.bitacademy.spring.dao.BoardDao.selectOne", no);
-    } finally {
-      sqlSession.close();
-    }
-  }
-  
-  public int insert(Board board) throws Exception {
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    try {
-      int count = sqlSession.insert(
-          "net.bitacademy.spring.dao.BoardDao.insert", board);
-      sqlSession.commit(); // temp 데이터베이스 ---> 실제 데이터베이스에 적용
-      return count;
-    } finally {
-      sqlSession.close();
-    }
-  }
-  
-  public int update(Board board) throws Exception {
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    try {
-      int count = sqlSession.update(
-          "net.bitacademy.spring.dao.BoardDao.update", board);
-      sqlSession.commit(); // temp 데이터베이스 ---> 실제 데이터베이스에 적용
-      return count;
-    } finally {
-      sqlSession.close();
-    }
-  }
-  
-  public int delete(int no) throws Exception {
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    try {
-      int count = sqlSession.delete(
-          "net.bitacademy.spring.dao.BoardDao.delete", no);
-      sqlSession.commit(); // temp 데이터베이스 ---> 실제 데이터베이스에 적용
-      return count;
-    } finally {
-      sqlSession.close();
-    }
-  }
-  
+/* mybatis의 MapperScannerConfigurer에서 사용할 인터페이스
+ * => SQL 문을 찾을 때, 인터페이스 이름과 메서드 이름을 사용하여 찾는다.
+ * => SQL 파일에서 namespace 이름과 SQL문의 id 값이 위의 이름과 일치해야 한다.
+ * => 메서드의 파라미터 개수는 반드시 한 개여야 한다.
+ */
+public interface BoardDao {  
+  List<Board> selectList() throws Exception;
+  Board selectOne(int no) throws Exception;
+  int insert(Board board) throws Exception;
+  int update(Board board) throws Exception;
+  int delete(int no) throws Exception;
 }
 
 

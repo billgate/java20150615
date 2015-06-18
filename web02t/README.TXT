@@ -39,7 +39,7 @@
 
 [step07] - CRUD(Create, Read, Update, Delete)을 한 클래스로 묶는다. 
 
-
+[step08] - Mybatis의 DAO 자동 생성기 투입
 
 
 
