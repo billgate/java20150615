@@ -54,6 +54,9 @@
 1) BOARD_LOG 테이블 생성한다.
 2) BoardLog VO 클래스 만든다.
 
+[step11] - Transaction 처리하는 방법
+1) 코드에서 트랜잭션을 직접 관리하기
+
 
 
 
