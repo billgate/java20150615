@@ -4,8 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.bitacademy.spring.dao.BoardDao;
-import net.bitacademy.spring.dao.BoardLogDao;
+import net.bitacademy.spring.service.BoardService;
 import net.bitacademy.spring.vo.Board;
 import net.bitacademy.spring.vo.BoardLog;
 
@@ -18,53 +17,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-  @Autowired
-  BoardDao boardDao;
+  @Autowired BoardService boardService;
   
-  @Autowired
-  BoardLogDao boardLogDao;
-  
-  @RequestMapping("/list") // web.xml에 설정한 확장자명(.do)은 생략해도 된다.
+  @RequestMapping("/list") 
   public String list(Model model) throws Exception {
-    List<Board> boards = boardDao.selectList();
-    model.addAttribute("list", boards);
+    model.addAttribute("list", boardService.list());
     return "board/list";
   }
   
   @RequestMapping(value="/add", method=RequestMethod.POST)
   public String add(Board board, HttpServletRequest request) throws Exception {
-    boardDao.insert(board);
-    
-    logAction(board.getNo(), request.getRemoteAddr(), BoardLog.CMD_INSERT);
-    
+    boardService.add(board, request.getRemoteAddr());
     return "redirect:list.do";
   }
 
-  private void logAction(int no, String ip, String command)
-      throws Exception {
-    BoardLog boardLog = new BoardLog();
-    boardLog.setBoardNo(no);
-    boardLog.setIpAddress(ip);
-    boardLog.setCommand(command);
-    boardLogDao.insert(boardLog);
-  }
-  
   @RequestMapping(value="/change", method=RequestMethod.POST)
-  public String change(Board board) throws Exception {
-    boardDao.update(board);
+  public String change(Board board, HttpServletRequest request) throws Exception {
+    boardService.change(board, request.getRemoteAddr());
     return "redirect:list.do";
   }
   
   @RequestMapping("/remove")
-  public String remove(int no) throws Exception {
+  public String remove(int no, HttpServletRequest request) throws Exception {
     boardDao.delete(no);
+    logAction(no, request.getRemoteAddr(), BoardLog.CMD_DELETE);
     return "redirect:list.do";
   }
   
   @RequestMapping("/detail")
-  public String detail(int no, Model model) throws Exception {
+  public String detail(int no, Model model, HttpServletRequest request) throws Exception {
     Board board = boardDao.selectOne(no);
     model.addAttribute("board", board);
+    logAction(no, request.getRemoteAddr(), BoardLog.CMD_SELECT);
     return "board/detail";
   }
 }
