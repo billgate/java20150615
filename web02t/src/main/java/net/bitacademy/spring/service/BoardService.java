@@ -22,7 +22,9 @@ public class BoardService {
   }
   
   public Board get(int no, String ip) throws Exception {
-    
+    Board board = boardDao.selectOne(no);
+    logAction(no, ip, BoardLog.CMD_SELECT);
+    return board;
   }
   
   public List<Board> list() throws Exception {
@@ -36,7 +38,9 @@ public class BoardService {
   }
   
   public int remove(int no, String ip) throws Exception {
-    
+    int count = boardDao.delete(no);
+    logAction(no, ip, BoardLog.CMD_DELETE);
+    return count;
   }
   
   private void logAction(int no, String ip, String command)
