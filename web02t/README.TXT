@@ -63,6 +63,8 @@
 => BoardService 클래스에 @Transactional 애노테이션 추가
 => /WEB-INF/config/application-context.xml 에 <tx:annotation-driven> 태그 추가
 
+[step13] - Transaction 처리하는 방법
+3) AOP 기술을 이용하여 처리
 
 
 
