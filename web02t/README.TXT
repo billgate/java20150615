@@ -41,7 +41,11 @@
 
 [step08] - Mybatis의 DAO 자동 생성기 투입
 
+[step09] - View Resolver 변경하기
+* view resolver (뷰 해결사)
+- 페이지 컨트롤러가 리턴한 값에 대해 뷰 컴포넌트를 실행하는 일.
 
+* 기존의 JSP를 WEB-INF/views/ 폴더로 옮긴다.
 
 
 

@@ -21,7 +21,7 @@ public class BoardController {
   public String list(Model model) throws Exception {
     List<Board> boards = boardDao.selectList();
     model.addAttribute("list", boards);
-    return "/board/list.jsp";
+    return "board/list";
   }
   
   @RequestMapping(value="/add", method=RequestMethod.POST)
@@ -46,7 +46,7 @@ public class BoardController {
   public String detail(int no, Model model) throws Exception {
     Board board = boardDao.selectOne(no);
     model.addAttribute("board", board);
-    return "/board/detail.jsp";
+    return "board/detail";
   }
 }
 
