@@ -12,7 +12,7 @@
   </resultMap>
 
 	<insert id="insert" parameterType="BoardLog">
-	   insert into board_log(bno2,ipaddr,command,cre_dt) 
+	   insert into board_log(bno,ipaddr,command,cre_dt) 
 	   values(#{boardNo},#{ipAddress},#{command},now())
 	</insert>
 	
