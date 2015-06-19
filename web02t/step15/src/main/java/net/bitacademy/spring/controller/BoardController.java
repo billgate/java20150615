@@ -33,14 +33,14 @@ public class BoardController {
       @RequestParam MultipartFile file, 
       HttpServletRequest request) throws Exception {
     
-    String filename = this.generateFilename(file.getOriginalFilename());
-    
-    // 새로 만든 파일 이름을 사용하여 지정된 디렉토리로 옮긴다. 
-    file.transferTo(new File(
-        sc.getRealPath("/files")  // 파일을 저장할 경로를 준비한다. 
-        + "/" + filename));
-    
-    board.setFilepath(filename);
+    if (!file.isEmpty()) {
+      String filename = this.generateFilename(file.getOriginalFilename());
+      // 새로 만든 파일 이름을 사용하여 지정된 디렉토리로 옮긴다. 
+      file.transferTo(new File(
+          sc.getRealPath("/files")  // 파일을 저장할 경로를 준비한다. 
+          + "/" + filename));
+      board.setFilepath(filename);
+    }
     boardService.add(board, request.getRemoteAddr());
     return "redirect:list.do";
   }
