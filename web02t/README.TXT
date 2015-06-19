@@ -69,7 +69,12 @@
    tx:advice, aop:config 
 => Service 클래스에서 @Transactional 애노테이션을 제거한다. 
 
-
+[step14] - File Upload
+=> board 테이블에 filepath 컬럼 추가
+=> application-context.xml 파일에 멀티파트 요청 데이터를 처리하는 객체를 투입
+=> BoardController 클래스 변경
+=> Board 클래스 변경 
+=> BoardDao.xml 변경
 
 
 
