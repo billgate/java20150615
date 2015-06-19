@@ -11,15 +11,16 @@ public class Car /*extends java.lang.Object*/ {
     System.out.println("Car() 호출");
   }
   
+  public Car(int capacity) {
+    System.out.println("Car(capacity)");
+    this.capacity = capacity;
+  }
+
   public Car(String model) {
     System.out.println("Car(model)");
     this.model = model;
   }
   
-  public Car(int capacity) {
-    System.out.println("Car(capacity)");
-    this.capacity = capacity;
-  }
   
   public Car(String model, int capacity) {
     System.out.println("Car(model,capacity)");
