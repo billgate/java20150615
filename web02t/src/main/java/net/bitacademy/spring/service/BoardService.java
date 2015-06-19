@@ -19,7 +19,7 @@ public class BoardService {
   
   public int add(Board board, String ip) throws Exception {
     int count = boardDao.insert(board);
-    logAction(board.getNo(), ip, BoardLog.CMD_INSERT + "OK");
+    logAction(board.getNo(), ip, BoardLog.CMD_INSERT);
     return count;
   }
   

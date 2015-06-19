@@ -26,7 +26,8 @@ CREATE TABLE board_log (
   PRIMARY KEY (blno)
 );
 
-
+alter table board
+  add column filepath VARCHAR(255) NULL;
 
 
 
