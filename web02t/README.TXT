@@ -76,6 +76,13 @@
 => Board 클래스 변경 
 => BoardDao.xml 변경
 
+[step15] - 프론트 컨트롤러가 공통으로 사용하는 객체를 분리하여 별도로 준비한다.
+=> ServletContextListener 구현체를 통해 공용 객체를 준비한다.
+=> ContextLoaderListener를 web.xml에 등록한다.
+=> ContextLoaderListener에서 준비할 개체 정보를 application-context.xml에 등록한다.
+=> 페이지 컨트롤러와 웹 관련 객체들은 dispatcher-servlet.xml에 등록한다.
+
+
 
 
 
