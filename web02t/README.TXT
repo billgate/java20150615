@@ -65,6 +65,9 @@
 
 [step13] - Transaction 처리하는 방법
 3) AOP 기술을 이용하여 처리
+=> application-context.xml 파일에 AOP 관련 태그 추가
+   tx:advice, aop:config 
+=> Service 클래스에서 @Transactional 애노테이션을 제거한다. 
 
 
 
